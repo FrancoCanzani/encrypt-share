@@ -74,3 +74,4 @@ func (d *Database) DecrementSession(id string) error {
     }
     return err
 }
+

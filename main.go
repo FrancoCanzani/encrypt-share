@@ -111,6 +111,8 @@ func main() {
             return
         }
     
+        go db.DecrementSession(request.Id)
+        
         c.JSON(http.StatusOK, gin.H{
             "tetx": text,
         })
