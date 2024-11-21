@@ -1,4 +1,4 @@
-module en
+module encrypt-share
 
 go 1.23.3
 
