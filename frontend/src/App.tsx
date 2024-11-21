@@ -1,15 +1,34 @@
 import { useState } from 'react';
 import { Button } from '@/components/ui/button';
 import { Textarea } from '@/components/ui/textarea';
-
+import CopyResult from './components/copy-result';
 export default function EncryptionForm() {
   const [text, setText] = useState('');
+  const [result, setResult] = useState({ id: '', key: '' });
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    // Here you would implement the encryption logic
-    console.log('Text to encrypt:', text);
-    // For now, we'll just log the text
+
+    try {
+      const req = await fetch('http://localhost:8080/encrypt', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ text: text.trim() }),
+      });
+
+      if (!req.ok) {
+        throw new Error('Network response was not ok');
+      }
+
+      const res = await req.json();
+      setResult(res);
+      console.log(res);
+      setText('');
+    } catch (error) {
+      console.error('Error:', error);
+    }
   };
 
   return (
@@ -37,6 +56,9 @@ export default function EncryptionForm() {
             Encrypt
           </Button>
         </form>
+        {result.id && result.key && (
+          <CopyResult resultId={result.id} resultKey={result.key} />
+        )}
       </main>
       <footer className='mt-16 text-center text-gray-500 font-sans'>
         <p>

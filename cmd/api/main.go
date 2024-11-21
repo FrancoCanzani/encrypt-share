@@ -5,6 +5,7 @@ import (
 	"encrypt-share/internal/crypto"
 	"encrypt-share/internal/database"
 
+	"github.com/gin-contrib/cors"
 	"github.com/google/uuid"
 
 	"log"
@@ -30,8 +31,13 @@ func main() {
     }
 
     r := gin.Default()
+
+    config := cors.DefaultConfig()
+    config.AllowAllOrigins = true  // For development. In production, specify your domains
+    config.AllowMethods = []string{"GET", "POST", "OPTIONS"}
     
-    // Change to POST for receiving JSON
+    r.Use(cors.New(config))
+    
     r.POST("/encrypt", func(c *gin.Context) {  
         var request EncryptRequest
         
@@ -114,7 +120,7 @@ func main() {
         go db.DecrementSession(request.Id)
         
         c.JSON(http.StatusOK, gin.H{
-            "tetx": text,
+            "text": text,
         })
     })
 
