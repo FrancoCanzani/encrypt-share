@@ -84,32 +84,33 @@ func main() {
     })
     
     r.GET("/decrypt", func(c *gin.Context) {  
-        var request DecryptRequest
+        id := c.Query("id")
+        key := c.Query("key")
         
-        if err := c.ShouldBindJSON(&request); err != nil {
+        if id == "" || key == "" {
             c.JSON(http.StatusBadRequest, gin.H{
-                "error": err.Error(),
+                "error": "Missing id or key parameter",
             })
             return
         }
- 
-        encrypted_text, err := db.GetMessage(request.Id)
+    
+        encrypted_text, err := db.GetMessage(id)
         if err != nil {
             c.JSON(http.StatusInternalServerError, gin.H{
                 "error": err.Error(),
             })
             return
         }
-
-        key, err := base64.URLEncoding.DecodeString(request.Key)
+        
+        decodedKey, err := base64.URLEncoding.DecodeString(key)
         if err != nil {
             c.JSON(http.StatusBadRequest, gin.H{
                 "error": "Invalid key format",
             })
             return
         }
-
-        text, err := crypto.Decrypt(encrypted_text, key)
+        
+        text, err := crypto.Decrypt(encrypted_text, decodedKey)
         if err != nil {
             c.JSON(http.StatusInternalServerError, gin.H{
                 "error": err.Error(),
@@ -117,7 +118,7 @@ func main() {
             return
         }
     
-        go db.DecrementSession(request.Id)
+        go db.DecrementSession(id)
         
         c.JSON(http.StatusOK, gin.H{
             "text": text,

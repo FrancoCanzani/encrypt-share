@@ -14,7 +14,7 @@ export default function CopyResult({
       </span>
       <CopyButton
         className='text-white bg-gray-800 rounded-md hover:bg-gray-700 transition duration-300 ease-in-out'
-        textToCopy={`${resultId}#${resultKey}`}
+        textToCopy={`http://localhost:5173/${resultId}#${resultKey}`}
       />
     </div>
   );

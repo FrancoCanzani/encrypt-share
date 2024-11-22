@@ -33,15 +33,7 @@ export default function EncryptPage() {
   };
 
   return (
-    <div className='min-h-screen bg-[#f4f1ec] flex flex-col justify-center items-center p-4'>
-      <header className='w-full max-w-2xl text-center mb-12'>
-        <h1 className='text-4xl md:text-5xl font-serif font-bold text-gray-800 mb-4'>
-          Encrypt Your Message
-        </h1>
-        <p className='text-xl text-gray-600 font-sans'>
-          Enter your text below and click "Encrypt" to secure your message.
-        </p>
-      </header>
+    <>
       <main className='w-full max-w-2xl'>
         <form onSubmit={handleSubmit} className='space-y-6'>
           <Textarea
@@ -66,6 +58,6 @@ export default function EncryptPage() {
           &copy; {new Date().getFullYear()} Encrypt Share. All rights reserved.
         </p>
       </footer>
-    </div>
+    </>
   );
 }
