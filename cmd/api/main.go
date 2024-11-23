@@ -4,6 +4,7 @@ import (
 	"encoding/base64"
 	"encrypt-share/internal/crypto"
 	"encrypt-share/internal/database"
+	"fmt"
 
 	"github.com/gin-contrib/cors"
 	"github.com/google/uuid"
@@ -99,6 +100,7 @@ func main() {
             c.JSON(http.StatusInternalServerError, gin.H{
                 "error": err.Error(),
             })
+            fmt.Println(err)
             return
         }
         
