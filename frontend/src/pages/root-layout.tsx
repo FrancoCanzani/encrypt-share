@@ -1,13 +1,12 @@
-import DecryptionEffect from '@/components/decryption-effect';
 import { Outlet } from 'react-router-dom';
 import { Link } from 'react-router-dom';
 
 export default function RootLayout() {
   return (
-    <main className='min-h-screen font-mono max-w-4xl mx-auto bg-black text-white flex flex-col justify-start items-center p-4'>
+    <div className='min-h-screen font-mono max-w-4xl mx-auto bg-black text-white p-4 flex items-center flex-col justify-start'>
       <header className='w-full flex items-center justify-between text-center mb-12'>
         <Link to={'/'} className='text-2xl font-medium'>
-          <DecryptionEffect text='Encrypt Share' />
+          Encrypt Share
         </Link>
         <div className='flex items-center justify-end space-x-6'>
           <Link to={'/how'} className='hover:underline underline-offset-2'>
@@ -27,7 +26,17 @@ export default function RootLayout() {
           </a>
         </div>
       </header>
-      <Outlet />
-    </main>
+      <main className='w-full flex flex-col justify-start items-center'>
+        <Outlet />
+      </main>
+      <footer className='flex-1 p-4 mt-8 text-xs w-full flex items-center justify-end flex-col'>
+        <div className='flex w-full items-center justify-between'>
+          © All rights reserved
+          <Link to={'/tos'} className='hover:underline underline-offset-2'>
+            Terms of service
+          </Link>
+        </div>
+      </footer>
+    </div>
   );
 }
