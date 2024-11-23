@@ -4,10 +4,17 @@ import (
 	"encrypt-share/internal/database"
 	"encrypt-share/internal/server"
 	"log"
+	"os"
 )
 
 func main() {
-    db, err := database.NewDatabase("internal/database/data.db")
+    dbPath := os.Getenv("DB_PATH")
+    if dbPath == "" {
+        // Fallback for local development
+        dbPath = "internal/database/data.db"
+    }
+
+    db, err := database.NewDatabase(dbPath)
     if err != nil {
         log.Fatal(err)
     }
