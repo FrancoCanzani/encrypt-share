@@ -13,7 +13,12 @@ export default function CopyResult({
   resultKey: string;
   resultId: string;
 }) {
-  const url = `http://localhost:5173/${resultId}#${resultKey}`;
+  const baseUrl =
+    import.meta.env.VITE_VERCEL_ENV == 'development'
+      ? 'encrypt-share-rose.vercel.app'
+      : 'http://localhost:5173';
+
+  const url = `${baseUrl}/${resultId}#${resultKey}`;
 
   return (
     <div className='min-h-6 p-2 mt-8 space-x-4 flex items-center justify-start border border-white'>
