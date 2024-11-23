@@ -10,9 +10,9 @@ function App() {
     <Routes>
       <Route element={<RootLayout />}>
         <Route path='/' element={<EncryptPage />} />
-        <Route path='/:id' element={<DecryptPage />} />
         <Route path='/how' element={<HowItWorksPage />} />
         <Route path='/tos' element={<TermsOfServicePage />} />
+        <Route path='/:id' element={<DecryptPage />} />
       </Route>
     </Routes>
   );

@@ -15,7 +15,7 @@ export default function CopyResult({
 }) {
   const baseUrl =
     import.meta.env.VITE_VERCEL_ENV == 'production'
-      ? 'encrypt-share-rose.vercel.app'
+      ? 'https://encrypt-share-rose.vercel.app'
       : 'http://localhost:5173';
 
   const url = `${baseUrl}/${resultId}#${resultKey}`;
