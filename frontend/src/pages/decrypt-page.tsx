@@ -63,7 +63,7 @@ export default function DecryptPage() {
     <div>
       {decryptedText ? (
         <>
-          <Card className='max-w-2xl mx-auto bg-black text-white'>
+          <Card className='bg-black text-white'>
             <CardHeader>
               <CardTitle>Message:</CardTitle>
             </CardHeader>

@@ -12,6 +12,7 @@ primary_region = 'mad'
 
 [env]
   PORT = '8080'
+  DB_PATH = "/data/messages.db"
 
 [http_service]
   internal_port = 8080
@@ -29,6 +30,3 @@ primary_region = 'mad'
 [mounts]
   source = "encrypt_data"
   destination = "/data"
-
-[env]
-  DB_PATH = "/data/messages.db"

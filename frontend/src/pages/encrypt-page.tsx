@@ -5,6 +5,12 @@ import { Alert, AlertDescription } from '@/components/ui/alert';
 import { Loader2 } from 'lucide-react';
 import CopyResult from '@/components/copy-result';
 
+type EncryptResponse = {
+  id: string;
+  key: string;
+  error?: string;
+};
+
 export default function EncryptPage() {
   const [text, setText] = useState('');
   const [result, setResult] = useState({ id: '', key: '' });
@@ -15,7 +21,7 @@ export default function EncryptPage() {
     e.preventDefault();
 
     if (!text.trim()) {
-      setError('Please enter some text to encrypt');
+      setError('Please enter a message to encrypt');
       return;
     }
 
@@ -24,7 +30,7 @@ export default function EncryptPage() {
       setError('');
       setResult({ id: '', key: '' });
 
-      const req = await fetch(`${import.meta.env.VITE_API_URL}/encrypt`, {
+      const response = await fetch(`${import.meta.env.VITE_API_URL}/encrypt`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -32,21 +38,28 @@ export default function EncryptPage() {
         body: JSON.stringify({ text: text.trim() }),
       });
 
-      const data = await req.json();
-
-      if (!req.ok) {
-        throw new Error(data.error || 'Failed to encrypt message');
+      if (!response.ok) {
+        throw new Error('Unable to encrypt message at this time');
       }
 
-      setResult(data);
+      // Check if we got a response at all
+      if (!response.body) {
+        throw new Error('No response from server');
+      }
+
+      const data: EncryptResponse = await response.json();
+
+      // Validate response data
+      if (!data.id || !data.key) {
+        throw new Error('Invalid response from server');
+      }
+
+      setResult({ id: data.id, key: data.key });
       setText('');
-    } catch (error) {
-      console.error('Error:', error);
-      setError(
-        error instanceof Error
-          ? error.message
-          : 'Failed to encrypt message. Please try again.'
-      );
+    } catch (err) {
+      setError('Unable to encrypt message. Please try again later');
+
+      console.error('Encryption error:', err);
     } finally {
       setIsLoading(false);
     }
@@ -82,7 +95,12 @@ export default function EncryptPage() {
           placeholder='Enter your text here...'
           className='w-full h-48 p-4 text-lg bg-black border border-gray-300 rounded-none focus:ring-2 focus:ring-gray-400 focus:border-transparent'
           disabled={isLoading}
+          maxLength={10000}
         />
+        <div className='text-right text-sm text-gray-400'>
+          {text.length}/10,000
+        </div>
+
         <Button
           type='submit'
           className='w-full py-3 px-6 text-lg text-white bg-black rounded-none border border-gray-300 hover:bg-black hover:ring-2 hover:ring-gray-400 hover:border-transparent transition duration-300 ease-in-out disabled:opacity-50 disabled:cursor-not-allowed'
