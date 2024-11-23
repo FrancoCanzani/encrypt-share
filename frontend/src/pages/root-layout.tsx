@@ -5,7 +5,7 @@ export default function RootLayout() {
   return (
     <div className='min-h-screen font-mono max-w-4xl mx-auto bg-black text-white p-4 flex items-center flex-col justify-start'>
       <header className='w-full flex items-center justify-between text-center mb-12'>
-        <Link to={'/'} className='text-2xl font-medium'>
+        <Link to={'/'} className='text-xl md:text-2xl font-medium'>
           Encrypt Share
         </Link>
         <div className='flex items-center justify-end space-x-6'>

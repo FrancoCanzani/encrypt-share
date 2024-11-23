@@ -38,21 +38,7 @@ export default function EncryptPage() {
         body: JSON.stringify({ text: text.trim() }),
       });
 
-      if (!response.ok) {
-        throw new Error('Unable to encrypt message at this time');
-      }
-
-      // Check if we got a response at all
-      if (!response.body) {
-        throw new Error('No response from server');
-      }
-
       const data: EncryptResponse = await response.json();
-
-      // Validate response data
-      if (!data.id || !data.key) {
-        throw new Error('Invalid response from server');
-      }
 
       setResult({ id: data.id, key: data.key });
       setText('');
@@ -97,9 +83,6 @@ export default function EncryptPage() {
           disabled={isLoading}
           maxLength={10000}
         />
-        <div className='text-right text-sm text-gray-400'>
-          {text.length}/10,000
-        </div>
 
         <Button
           type='submit'
