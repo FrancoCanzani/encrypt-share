@@ -18,7 +18,7 @@ export default function DecryptPage() {
     async function fetchEncryptedText() {
       try {
         const res = await fetch(
-          `http://localhost:8080/decrypt?id=${params.id}&key=${key}`
+          `${import.meta.env.VITE_API_URL}/decrypt?id=${params.id}&key=${key}`
         );
 
         const result: DecryptResponse = await res.json();

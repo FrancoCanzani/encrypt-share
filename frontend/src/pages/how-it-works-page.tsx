@@ -3,7 +3,7 @@ import { Separator } from '@/components/ui/separator';
 
 export default function HowItWorksPage() {
   return (
-    <div className='text-start p-6 space-y-8 text-white'>
+    <div className='text-start space-y-8 text-white'>
       <div className='mb-12'>
         <h1 className='text-4xl font-bold mb-4'>
           Technical Architecture & Security Model

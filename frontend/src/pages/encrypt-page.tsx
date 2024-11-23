@@ -24,7 +24,7 @@ export default function EncryptPage() {
       setError('');
       setResult({ id: '', key: '' });
 
-      const req = await fetch('http://localhost:8080/encrypt', {
+      const req = await fetch(`${import.meta.env.VITE_API_URL}/encrypt`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
