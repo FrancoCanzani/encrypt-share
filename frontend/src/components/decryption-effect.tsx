@@ -54,7 +54,7 @@ export default function DecryptionEffect({
 
   return (
     <motion.div
-      className='font-mono text-2xl min-h-[2em] flex items-center justify-center'
+      className='text-2xl min-h-[2em] flex items-center justify-center'
       initial={{ opacity: 0 }}
       animate={controls}
     >

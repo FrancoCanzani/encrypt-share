@@ -53,7 +53,7 @@ export default function EncryptPage() {
           <CopyResult resultId={result.id} resultKey={result.key} />
         )}
       </main>
-      <footer className='mt-16 text-center text-gray-500 font-sans'>
+      <footer className='mt-16 text-center text-gray-500'>
         <p>
           &copy; {new Date().getFullYear()} Encrypt Share. All rights reserved.
         </p>
