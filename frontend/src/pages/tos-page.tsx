@@ -2,7 +2,7 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 
 export default function TermsOfServicePage() {
   return (
-    <Card className='max-w-2xl mx-auto bg-black text-white'>
+    <Card className='bg-black text-white'>
       <CardHeader>
         <CardTitle>Terms of Service</CardTitle>
       </CardHeader>
