@@ -1,6 +1,7 @@
 import { useParams } from 'react-router';
 import DecryptionEffect from '@/components/decryption-effect';
 import { useEffect, useState } from 'react';
+import { Alert, AlertDescription } from '@/components/ui/alert';
 
 interface DecryptResponse {
   text?: string;
@@ -46,7 +47,11 @@ export default function DecryptPage() {
   }, [key, params.id]);
 
   if (error) {
-    return <div className='text-red-600 p-4'>Error: {error}</div>;
+    return (
+      <Alert variant='destructive' className='mb-6'>
+        <AlertDescription>{error}</AlertDescription>
+      </Alert>
+    );
   }
 
   return (

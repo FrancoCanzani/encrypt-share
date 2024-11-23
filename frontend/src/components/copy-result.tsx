@@ -8,12 +8,12 @@ export default function CopyResult({
   resultId: string;
 }) {
   return (
-    <div className='min-h-6 p-2 bg-white rounded-lg mt-6 space-x-4 flex items-center justify-start'>
-      <span className='truncate group relative font-semibold blur-[2.5px] hover:blur-0 transition-all duration-300'>
+    <div className='min-h-6 p-2 mt-8 space-x-4 flex items-center justify-start border border-white'>
+      <span className='truncate group relative font-medium text-sm'>
         http://localhost:5173/{resultId}#{resultKey}
       </span>
       <CopyButton
-        className='text-white bg-gray-800 rounded-md hover:bg-gray-700 transition duration-300 ease-in-out'
+        className='text-white bg-black border rounded-none border-gray-300 hover:bg-black hover:ring-2 hover:ring-gray-400 hover:border-transparent transition duration-300 ease-in-out'
         textToCopy={`http://localhost:5173/${resultId}#${resultKey}`}
       />
     </div>

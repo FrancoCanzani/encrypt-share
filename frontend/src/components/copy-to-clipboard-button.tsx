@@ -27,9 +27,9 @@ export function CopyButton({ textToCopy, className = '' }: CopyButtonProps) {
   return (
     <Button
       onClick={copyToClipboard}
-      variant={copied ? 'outline' : 'default'}
+      variant={'outline'}
       size='sm'
-      className={`relative transition-all duration-200 ${className}`}
+      className={`relative transition-all duration-200 hover:text-white ${className}`}
     >
       <span className='flex items-center gap-2'>
         {copied ? (
